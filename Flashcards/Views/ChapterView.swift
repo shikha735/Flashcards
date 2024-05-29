@@ -12,25 +12,41 @@ struct ChapterView: View {
     var chapter: Chapter
     @State private var newFlashcardQuestion = ""
     @State private var newFlashcardAnswer = ""
+    @State private var editingFlashcard: Flashcard?
+    @State private var errorMessage = ""
 
     var body: some View {
         VStack {
-            EditableTextField(text: $newFlashcardQuestion, placeholder: "New Question")
-            EditableTextEditor(text: $newFlashcardAnswer, placeholder: "New Answer")
+            EditableTextField(text: $newFlashcardQuestion, placeholder: "Question")
+            EditableTextEditor(text: $newFlashcardAnswer, placeholder: "Answer")
             Button(action: {
-                if !newFlashcardQuestion.isEmpty && !newFlashcardAnswer.isEmpty {
-                    viewModel.addFlashcard(to: chapter, in: book, question: newFlashcardQuestion, answer: newFlashcardAnswer)
+                if newFlashcardQuestion.trimmingCharacters(in: .whitespaces).isEmpty || newFlashcardAnswer.trimmingCharacters(in: .whitespaces).isEmpty {
+                    errorMessage = "Flashcard question and answer cannot be empty"
+                } else {
+                    if let flashcard = editingFlashcard {
+                        viewModel.updateFlashcard(book: book, chapter: chapter, flashcard: flashcard, newQuestion: newFlashcardQuestion, newAnswer: newFlashcardAnswer)
+                        editingFlashcard = nil
+                    } else {
+                        viewModel.addFlashcard(to: chapter, in: book, question: newFlashcardQuestion, answer: newFlashcardAnswer)
+                    }
                     newFlashcardQuestion = ""
                     newFlashcardAnswer = ""
+                    errorMessage = ""
                 }
             }) {
-                Text("Add Flashcard")
+                Text(editingFlashcard == nil ? "Add Flashcard" : "Update Flashcard")
                     .padding()
                     .background(Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(8)
             }
             .padding(.horizontal)
+            
+            if !errorMessage.isEmpty {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+                    .padding(.bottom)
+            }
             
             List {
                 ForEach(chapter.flashcards) { flashcard in
@@ -39,6 +55,7 @@ struct ChapterView: View {
                             Button(action: {
                                 newFlashcardQuestion = flashcard.question
                                 newFlashcardAnswer = flashcard.answer
+                                editingFlashcard = flashcard
                             }) {
                                 Text("Edit")
                                 Image(systemName: "pencil")
@@ -68,3 +85,4 @@ struct ChapterView_Previews: PreviewProvider {
         ChapterView(viewModel: viewModel, book: book, chapter: chapter)
     }
 }
+

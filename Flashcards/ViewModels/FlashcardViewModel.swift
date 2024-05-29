@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 
 class FlashcardViewModel: ObservableObject {
     @Published var books: [Book] = []
@@ -16,42 +15,56 @@ class FlashcardViewModel: ObservableObject {
         books.append(newBook)
     }
 
-    func updateBook(book: Book, newTitle: String) {
+    func deleteBook(book: Book) {
         if let index = books.firstIndex(where: { $0.id == book.id }) {
-            books[index].title = newTitle
+            books.remove(at: index)
         }
     }
 
-    func deleteBook(book: Book) {
-        books.removeAll { $0.id == book.id }
+    func updateBook(book: Book, title: String) {
+        if let index = books.firstIndex(where: { $0.id == book.id }) {
+            books[index].title = title
+        }
     }
 
     func addChapter(to book: Book, title: String) {
+        let newChapter = Chapter(title: title, flashcards: [])
         if let index = books.firstIndex(where: { $0.id == book.id }) {
-            let newChapter = Chapter(title: title, flashcards: [])
             books[index].chapters.append(newChapter)
-        }
-    }
-
-    func updateChapter(book: Book, chapter: Chapter, newTitle: String) {
-        if let bookIndex = books.firstIndex(where: { $0.id == book.id }) {
-            if let chapterIndex = books[bookIndex].chapters.firstIndex(where: { $0.id == chapter.id }) {
-                books[bookIndex].chapters[chapterIndex].title = newTitle
-            }
         }
     }
 
     func deleteChapter(book: Book, chapter: Chapter) {
         if let bookIndex = books.firstIndex(where: { $0.id == book.id }) {
-            books[bookIndex].chapters.removeAll { $0.id == chapter.id }
+            if let chapterIndex = books[bookIndex].chapters.firstIndex(where: { $0.id == chapter.id }) {
+                books[bookIndex].chapters.remove(at: chapterIndex)
+            }
+        }
+    }
+
+    func updateChapter(book: Book, chapter: Chapter, title: String) {
+        if let bookIndex = books.firstIndex(where: { $0.id == book.id }) {
+            if let chapterIndex = books[bookIndex].chapters.firstIndex(where: { $0.id == chapter.id }) {
+                books[bookIndex].chapters[chapterIndex].title = title
+            }
         }
     }
 
     func addFlashcard(to chapter: Chapter, in book: Book, question: String, answer: String) {
+        let newFlashcard = Flashcard(question: question, answer: answer)
         if let bookIndex = books.firstIndex(where: { $0.id == book.id }) {
             if let chapterIndex = books[bookIndex].chapters.firstIndex(where: { $0.id == chapter.id }) {
-                let newFlashcard = Flashcard(question: question, answer: answer)
                 books[bookIndex].chapters[chapterIndex].flashcards.append(newFlashcard)
+            }
+        }
+    }
+
+    func deleteFlashcard(book: Book, chapter: Chapter, flashcard: Flashcard) {
+        if let bookIndex = books.firstIndex(where: { $0.id == book.id }) {
+            if let chapterIndex = books[bookIndex].chapters.firstIndex(where: { $0.id == chapter.id }) {
+                if let flashcardIndex = books[bookIndex].chapters[chapterIndex].flashcards.firstIndex(where: { $0.id == flashcard.id }) {
+                    books[bookIndex].chapters[chapterIndex].flashcards.remove(at: flashcardIndex)
+                }
             }
         }
     }
@@ -66,12 +79,5 @@ class FlashcardViewModel: ObservableObject {
             }
         }
     }
-
-    func deleteFlashcard(book: Book, chapter: Chapter, flashcard: Flashcard) {
-        if let bookIndex = books.firstIndex(where: { $0.id == book.id }) {
-            if let chapterIndex = books[bookIndex].chapters.firstIndex(where: { $0.id == chapter.id }) {
-                books[bookIndex].chapters[chapterIndex].flashcards.removeAll { $0.id == flashcard.id }
-            }
-        }
-    }
 }
+

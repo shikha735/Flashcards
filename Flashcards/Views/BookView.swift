@@ -11,18 +11,29 @@ struct BookView: View {
     @ObservedObject var viewModel: FlashcardViewModel
     var book: Book
     @State private var newChapterTitle = ""
-    
+    @State private var editingChapter: Chapter?
+    @State private var errorMessage = ""
+
     var body: some View {
         VStack {
             HStack {
-                EditableTextField(text: $newChapterTitle, placeholder: "New Chapter Title")
+                TextField("Chapter Title", text: $newChapterTitle)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
                 Button(action: {
-                    if !newChapterTitle.isEmpty {
-                        viewModel.addChapter(to: book, title: newChapterTitle)
+                    if newChapterTitle.trimmingCharacters(in: .whitespaces).isEmpty {
+                        errorMessage = "Chapter title cannot be empty"
+                    } else {
+                        if let chapter = editingChapter {
+                            viewModel.updateChapter(book: book, chapter: chapter, title: newChapterTitle)
+                            editingChapter = nil
+                        } else {
+                            viewModel.addChapter(to: book, title: newChapterTitle)
+                        }
                         newChapterTitle = ""
+                        errorMessage = ""
                     }
                 }) {
-                    Text("Add Chapter")
+                    Text(editingChapter == nil ? "Add Chapter" : "Update Chapter")
                         .padding()
                         .background(Color.blue)
                         .foregroundColor(.white)
@@ -30,6 +41,12 @@ struct BookView: View {
                 }
             }
             .padding()
+            
+            if !errorMessage.isEmpty {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+                    .padding(.bottom)
+            }
             
             List {
                 ForEach(book.chapters) { chapter in
@@ -39,6 +56,7 @@ struct BookView: View {
                     .contextMenu {
                         Button(action: {
                             newChapterTitle = chapter.title
+                            editingChapter = chapter
                         }) {
                             Text("Edit")
                             Image(systemName: "pencil")
@@ -67,3 +85,4 @@ struct BookView_Previews: PreviewProvider {
         BookView(viewModel: viewModel, book: book)
     }
 }
+

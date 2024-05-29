@@ -22,6 +22,7 @@
 		097D4D192C06FA54005CD630 /* ChapterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D4D182C06FA54005CD630 /* ChapterView.swift */; };
 		097D4D1B2C06FD43005CD630 /* EditableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D4D1A2C06FD43005CD630 /* EditableTextField.swift */; };
 		097D4D1D2C0701DC005CD630 /* FlashcardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D4D1C2C0701DC005CD630 /* FlashcardView.swift */; };
+		097D4D1F2C079633005CD630 /* EditableTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D4D1E2C079633005CD630 /* EditableTextEditor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		097D4D182C06FA54005CD630 /* ChapterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterView.swift; sourceTree = "<group>"; };
 		097D4D1A2C06FD43005CD630 /* EditableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextField.swift; sourceTree = "<group>"; };
 		097D4D1C2C0701DC005CD630 /* FlashcardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardView.swift; sourceTree = "<group>"; };
+		097D4D1E2C079633005CD630 /* EditableTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextEditor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 				097D4D182C06FA54005CD630 /* ChapterView.swift */,
 				097D4D1A2C06FD43005CD630 /* EditableTextField.swift */,
 				097D4D1C2C0701DC005CD630 /* FlashcardView.swift */,
+				097D4D1E2C079633005CD630 /* EditableTextEditor.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 			files = (
 				097D4CDF2C06EF6A005CD630 /* ContentView.swift in Sources */,
 				097D4D1D2C0701DC005CD630 /* FlashcardView.swift in Sources */,
+				097D4D1F2C079633005CD630 /* EditableTextEditor.swift in Sources */,
 				097D4D0F2C06F8EB005CD630 /* Flashcard.swift in Sources */,
 				097D4D1B2C06FD43005CD630 /* EditableTextField.swift in Sources */,
 				097D4CDD2C06EF6A005CD630 /* FlashcardsApp.swift in Sources */,

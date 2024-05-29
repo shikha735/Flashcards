@@ -29,19 +29,30 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var viewModel = FlashcardViewModel()
     @State private var newBookTitle = ""
-    
+    @State private var editingBook: Book?
+    @State private var errorMessage = ""
+
     var body: some View {
         NavigationView {
             VStack {
                 HStack {
-                    EditableTextField(text: $newBookTitle, placeholder: "New Book Title")
+                    TextField("Book Title", text: $newBookTitle)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
                     Button(action: {
-                        if !newBookTitle.isEmpty {
-                            viewModel.addBook(title: newBookTitle)
+                        if newBookTitle.trimmingCharacters(in: .whitespaces).isEmpty {
+                            errorMessage = "Book title cannot be empty"
+                        } else {
+                            if let book = editingBook {
+                                viewModel.updateBook(book: book, title: newBookTitle)
+                                editingBook = nil
+                            } else {
+                                viewModel.addBook(title: newBookTitle)
+                            }
                             newBookTitle = ""
+                            errorMessage = ""
                         }
                     }) {
-                        Text("Add Book")
+                        Text(editingBook == nil ? "Add Book" : "Update Book")
                             .padding()
                             .background(Color.blue)
                             .foregroundColor(.white)
@@ -50,6 +61,12 @@ struct ContentView: View {
                 }
                 .padding()
                 
+                if !errorMessage.isEmpty {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .padding(.bottom)
+                }
+                
                 List {
                     ForEach(viewModel.books) { book in
                         NavigationLink(destination: BookView(viewModel: viewModel, book: book)) {
@@ -57,9 +74,8 @@ struct ContentView: View {
                         }
                         .contextMenu {
                             Button(action: {
-                                if let index = viewModel.books.firstIndex(where: { $0.id == book.id }) {
-                                    newBookTitle = viewModel.books[index].title
-                                }
+                                newBookTitle = book.title
+                                editingBook = book
                             }) {
                                 Text("Edit")
                                 Image(systemName: "pencil")
