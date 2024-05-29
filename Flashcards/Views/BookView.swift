@@ -85,4 +85,3 @@ struct BookView_Previews: PreviewProvider {
         BookView(viewModel: viewModel, book: book)
     }
 }
-

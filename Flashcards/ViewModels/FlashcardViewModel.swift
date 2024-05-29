@@ -8,8 +8,14 @@
 import Foundation
 
 class FlashcardViewModel: ObservableObject {
-    @Published var books: [Book] = []
-
+    @Published var books: [Book] = [] {
+        didSet {
+            // Whenever books are modified, notify observers that recentlyModifiedBooks may have changed
+            objectWillChange.send()
+        }
+    }
+    @Published var notes: [Note] = []
+    
     func addBook(title: String) {
         let newBook = Book(title: title, chapters: [])
         books.append(newBook)
@@ -78,6 +84,33 @@ class FlashcardViewModel: ObservableObject {
                 }
             }
         }
+    }
+    
+    // Note methods
+    func addNote(title: String, content: String) {
+        let newNote = Note(title: title, content: content)
+        notes.append(newNote)
+    }
+
+    func updateNote(note: Note, title: String, content: String) {
+        if let index = notes.firstIndex(of: note) {
+            notes[index].title = title
+            notes[index].content = content
+        }
+    }
+
+    func deleteNote(note: Note) {
+        if let index = notes.firstIndex(of: note) {
+            notes.remove(at: index)
+        }
+    }
+
+}
+
+extension FlashcardViewModel {
+    var recentlyModifiedBooks: [Book] {
+        let sortedBooks = books.sorted { $0.id.uuidString > $1.id.uuidString }
+        return Array(sortedBooks.prefix(5))
     }
 }
 

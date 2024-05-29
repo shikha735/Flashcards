@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Book1" representedClassName="Book1" syncable="YES" codeGenerationType="class">
+        <attribute name="book_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="book_title" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Chapter1" representedClassName="Chapter1" syncable="YES" codeGenerationType="class"/>
+    <entity name="Flashcard1" representedClassName="Flashcard1" syncable="YES" codeGenerationType="class"/>
+    <entity name="Note1" representedClassName="Note1" syncable="YES" codeGenerationType="class"/>
+</model>
