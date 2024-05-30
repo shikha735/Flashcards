@@ -10,78 +10,84 @@ import SwiftUI
 struct HomeView: View {
     @StateObject private var viewModel = FlashcardViewModel()
     @State private var motivationalQuote = "Stay positive, work hard, make it happen."
-    @State private var selectedTab: Tab = .home
-
-    private enum Tab {
-        case home, books, notes
-    }
+//    @Binding var selectedTab: Tab
+//
+//    enum Tab {
+//        case home, books, notes, profile
+//    }
+    @State private var selectedTab: BottomMenuBar.Tab = .home
 
     var body: some View {
-        NavigationStack {
-            VStack {
-                ScrollView {
-                    VStack(alignment: .leading) {
-                        Text("Welcome!")
-                            .font(.largeTitle)
-                            .padding()
-
-                        Text(motivationalQuote)
-                            .font(.headline)
-                            .italic()
-                            .padding([.leading, .trailing])
-
-                        RecentlyCreatedView(viewModel: viewModel)
-                            .padding()
-                    }
-                }
-
-                Spacer()
-
-                HStack {
-                    Button(action: {
-                        selectedTab = .home
-                    }) {
-                        VStack {
-                            Image(systemName: "house")
-                            Text("Home")
+        NavigationView {
+            NavigationStack {
+                VStack {
+                    ScrollView {
+                        VStack(alignment: .leading) {
+                            Text("Welcome!")
+                                .font(.largeTitle)
+                                .padding()
+                            
+                            Text(motivationalQuote)
+                                .font(.headline)
+                                .italic()
+                                .padding([.leading, .trailing])
+                            
+                            RecentlyCreatedView(viewModel: viewModel)
+                                .padding()
                         }
                     }
-                    .padding()
-                    .frame(maxWidth: .infinity)
-
-                    NavigationLink(destination: BookListView(viewModel: viewModel)) {
-                        VStack {
-                            Image(systemName: "book")
-                            Text("Books")
-                        }
-                    }
-                    .padding()
-                    .frame(maxWidth: .infinity)
-
-                    NavigationLink(destination: NotesView(viewModel: viewModel)) {
-                        VStack {
-                            Image(systemName: "note.text")
-                            Text("Notes")
-                        }
-                    }
-                    .padding()
-                    .frame(maxWidth: .infinity)
                     
-                    NavigationLink(destination: ProfileView(viewModel: viewModel)) {
-                        VStack {
-                            Image(systemName: "person.circle")
-                            Text("Profile")
-                        }
-                    }
-                    .padding()
-                    .frame(maxWidth: .infinity)
+                    Spacer()
+                    
+                    BottomMenuBar(selectedTab: $selectedTab)
+                    
+                    /*                HStack {
+                     Spacer()
+                     Button(action: {
+                     selectedTab = .home
+                     }) {
+                     VStack {
+                     Image(systemName: "house")
+                     Text("Home")
+                     }
+                     }
+                     .padding()
+                     .frame(maxWidth: .infinity)
+                     
+                     NavigationLink(destination: BookListView(viewModel: viewModel, selectedTab: $selectedTab)) {
+                     VStack {
+                     Image(systemName: "book")
+                     Text("Books")
+                     }
+                     }
+                     .padding()
+                     .frame(maxWidth: .infinity)
+                     
+                     NavigationLink(destination: NotesView(viewModel: viewModel, selectedTab: $selectedTab)) {
+                     VStack {
+                     Image(systemName: "note.text")
+                     Text("Notes")
+                     }
+                     }
+                     .padding()
+                     .frame(maxWidth: .infinity)
+                     
+                     NavigationLink(destination: ProfileView(viewModel: viewModel)) {
+                     VStack {
+                     Image(systemName: "person.circle")
+                     Text("Profile")
+                     }
+                     }
+                     .padding()
+                     .frame(maxWidth: .infinity)
+                     }
+                     .background(Color(UIColor.systemGray6)) */
                 }
-                .background(Color(UIColor.systemGray6))
+                .navigationTitle("Flashcards")
             }
-            .navigationTitle("Flashcards")
-        }
-        .onAppear {
-            loadMotivationalQuote()
+            .onAppear {
+                loadMotivationalQuote()
+            }
         }
     }
 
@@ -97,6 +103,7 @@ struct HomeView: View {
         motivationalQuote = quotes.randomElement() ?? motivationalQuote
     }
 }
+
 
 struct RecentlyCreatedView: View {
     @ObservedObject var viewModel: FlashcardViewModel
@@ -116,8 +123,9 @@ struct RecentlyCreatedView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView() // Pass a constant binding for selectedTab
     }
 }
+
 
 

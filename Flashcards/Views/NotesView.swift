@@ -9,71 +9,62 @@ import SwiftUI
 
 struct NotesView: View {
     @ObservedObject var viewModel: FlashcardViewModel
+    @State private var selectedTab: BottomMenuBar.Tab = .notes
     @State private var newNoteTitle = ""
     @State private var newNoteContent = ""
     @State private var editingNote: Note?
     @State private var errorMessage = ""
 
     var body: some View {
-        VStack {
-            TextField("Note Title", text: $newNoteTitle)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+        NavigationStack {
+            VStack {
+                TextField("Note Title", text: $newNoteTitle)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+
+                EditableTextEditor(text: $newNoteContent, placeholder: "New Note Content")
+
+                Button(action: {
+                    if newNoteTitle.trimmingCharacters(in: .whitespaces).isEmpty || newNoteContent.trimmingCharacters(in: .whitespaces).isEmpty {
+                        errorMessage = "Note title and content cannot be empty"
+                    } else {
+                        if let note = editingNote {
+                            viewModel.updateNote(note: note, title: newNoteTitle, content: newNoteContent)
+                            editingNote = nil
+                        } else {
+                            viewModel.addNote(title: newNoteTitle, content: newNoteContent)
+                        }
+                        newNoteTitle = ""
+                        newNoteContent = ""
+                        errorMessage = ""
+                    }
+                }) {
+                    Text(editingNote == nil ? "Add Note" : "Update Note")
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                }
                 .padding()
 
-            EditableTextEditor(text: $newNoteContent, placeholder: "New Note Content")
-            
-            Button(action: {
-                if newNoteTitle.trimmingCharacters(in: .whitespaces).isEmpty || newNoteContent.trimmingCharacters(in: .whitespaces).isEmpty {
-                    errorMessage = "Note title and content cannot be empty"
-                } else {
-                    if let note = editingNote {
-                        viewModel.updateNote(note: note, title: newNoteTitle, content: newNoteContent)
-                        editingNote = nil
-                    } else {
-                        viewModel.addNote(title: newNoteTitle, content: newNoteContent)
-                    }
-                    newNoteTitle = ""
-                    newNoteContent = ""
-                    errorMessage = ""
+                if !errorMessage.isEmpty {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .padding(.bottom)
                 }
-            }) {
-                Text(editingNote == nil ? "Add Note" : "Update Note")
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
-            }
-            .padding()
 
-            if !errorMessage.isEmpty {
-                Text(errorMessage)
-                    .foregroundColor(.red)
-                    .padding(.bottom)
-            }
-            
-            List {
-                ForEach(viewModel.notes) { note in
-                    Text(note.title + ": " + note.content)
-                        .contextMenu {
-                            Button(action: {
-                                newNoteTitle = note.title
-                                newNoteContent = note.content
-                                editingNote = note
-                            }) {
-                                Text("Edit")
-                                Image(systemName: "pencil")
-                            }
-                            Button(action: {
-                                viewModel.deleteNote(note: note)
-                            }) {
-                                Text("Delete")
-                                Image(systemName: "trash")
-                            }
+                List {
+                    ForEach(viewModel.notes) { note in
+                        NavigationLink(destination: NoteDetailView(viewModel: viewModel, note: note)) {
+                            Text(note.title)
                         }
+                    }
                 }
             }
+            .navigationTitle("Notes")
+            .padding(.bottom, 60) // Adjust padding to accommodate BottomMenuBar
+            .overlay(BottomMenuBar(selectedTab: $selectedTab), alignment: .bottom)
         }
-        .navigationTitle("Notes")
     }
 }
 
@@ -82,3 +73,4 @@ struct NotesView_Previews: PreviewProvider {
         NotesView(viewModel: FlashcardViewModel())
     }
 }
+

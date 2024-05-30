@@ -30,6 +30,8 @@
 		097D4D292C07B4AA005CD630 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D4D282C07B4AA005CD630 /* HomeView.swift */; };
 		097D4D2E2C07C926005CD630 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D4D2D2C07C926005CD630 /* DataStore.swift */; };
 		09DC91112C07DE30007370D6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DC91102C07DE30007370D6 /* ProfileView.swift */; };
+		09DC91152C07F88B007370D6 /* BottomMenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DC91142C07F88B007370D6 /* BottomMenuBar.swift */; };
+		09DC91172C080FDC007370D6 /* NoteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DC91162C080FDC007370D6 /* NoteDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +78,8 @@
 		097D4D282C07B4AA005CD630 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		097D4D2D2C07C926005CD630 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		09DC91102C07DE30007370D6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		09DC91142C07F88B007370D6 /* BottomMenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMenuBar.swift; sourceTree = "<group>"; };
+		09DC91162C080FDC007370D6 /* NoteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,8 +197,10 @@
 				097D4D202C07A1AA005CD630 /* AddItemView.swift */,
 				097D4D222C07A1C4005CD630 /* NotesView.swift */,
 				097D4D262C07B208005CD630 /* BookListView.swift */,
-				097D4D282C07B4AA005CD630 /* HomeView.swift */,
 				09DC91102C07DE30007370D6 /* ProfileView.swift */,
+				09DC91142C07F88B007370D6 /* BottomMenuBar.swift */,
+				09DC91162C080FDC007370D6 /* NoteDetailView.swift */,
+				097D4D282C07B4AA005CD630 /* HomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -339,6 +345,8 @@
 				097D4CDD2C06EF6A005CD630 /* FlashcardsApp.swift in Sources */,
 				097D4D112C06F9B1005CD630 /* FlashcardViewModel.swift in Sources */,
 				097D4D212C07A1AA005CD630 /* AddItemView.swift in Sources */,
+				09DC91152C07F88B007370D6 /* BottomMenuBar.swift in Sources */,
+				09DC91172C080FDC007370D6 /* NoteDetailView.swift in Sources */,
 				09DC91112C07DE30007370D6 /* ProfileView.swift in Sources */,
 				097D4D0A2C06F8BE005CD630 /* Book.swift in Sources */,
 				097D4D252C07A255005CD630 /* Note.swift in Sources */,
