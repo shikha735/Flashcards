@@ -10,84 +10,31 @@ import SwiftUI
 struct HomeView: View {
     @StateObject private var viewModel = FlashcardViewModel()
     @State private var motivationalQuote = "Stay positive, work hard, make it happen."
-//    @Binding var selectedTab: Tab
-//
-//    enum Tab {
-//        case home, books, notes, profile
-//    }
-    @State private var selectedTab: BottomMenuBar.Tab = .home
-
     var body: some View {
         NavigationView {
-            NavigationStack {
-                VStack {
-                    ScrollView {
-                        VStack(alignment: .leading) {
-                            Text("Welcome!")
-                                .font(.largeTitle)
-                                .padding()
-                            
-                            Text(motivationalQuote)
-                                .font(.headline)
-                                .italic()
-                                .padding([.leading, .trailing])
-                            
-                            RecentlyCreatedView(viewModel: viewModel)
-                                .padding()
-                        }
+            VStack {
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        Text("Welcome!")
+                            .font(.largeTitle)
+                            .padding()
+                        
+                        Text(motivationalQuote)
+                            .font(.headline)
+                            .italic()
+                            .padding([.leading, .trailing])
+                        
+                        RecentlyCreatedView(viewModel: viewModel)
+                            .padding()
                     }
-                    
-                    Spacer()
-                    
-                    BottomMenuBar(selectedTab: $selectedTab)
-                    
-                    /*                HStack {
-                     Spacer()
-                     Button(action: {
-                     selectedTab = .home
-                     }) {
-                     VStack {
-                     Image(systemName: "house")
-                     Text("Home")
-                     }
-                     }
-                     .padding()
-                     .frame(maxWidth: .infinity)
-                     
-                     NavigationLink(destination: BookListView(viewModel: viewModel, selectedTab: $selectedTab)) {
-                     VStack {
-                     Image(systemName: "book")
-                     Text("Books")
-                     }
-                     }
-                     .padding()
-                     .frame(maxWidth: .infinity)
-                     
-                     NavigationLink(destination: NotesView(viewModel: viewModel, selectedTab: $selectedTab)) {
-                     VStack {
-                     Image(systemName: "note.text")
-                     Text("Notes")
-                     }
-                     }
-                     .padding()
-                     .frame(maxWidth: .infinity)
-                     
-                     NavigationLink(destination: ProfileView(viewModel: viewModel)) {
-                     VStack {
-                     Image(systemName: "person.circle")
-                     Text("Profile")
-                     }
-                     }
-                     .padding()
-                     .frame(maxWidth: .infinity)
-                     }
-                     .background(Color(UIColor.systemGray6)) */
                 }
-                .navigationTitle("Flashcards")
             }
+            .navigationTitle("Flashcards")
             .onAppear {
                 loadMotivationalQuote()
             }
+            
+            //        Spacer()
         }
     }
 

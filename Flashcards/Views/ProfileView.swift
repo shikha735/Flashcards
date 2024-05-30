@@ -13,20 +13,22 @@ struct ProfileView: View {
     @State private var email: String = "johndoe@example.com"
     
     var body: some View {
-        VStack {
-            Form {
-                Section(header: Text("User Information")) {
-                    Text("Username: \(username)")
-                    Text("Email: \(email)")
-                }
-                
-                Section(header: Text("Settings")) {
-                    Toggle("Notifications", isOn: .constant(true))
-                    Toggle("Dark Mode", isOn: .constant(false))
+        NavigationView {
+            VStack {
+                Form {
+                    Section(header: Text("User Information")) {
+                        Text("Username: \(username)")
+                        Text("Email: \(email)")
+                    }
+                    
+                    Section(header: Text("Settings")) {
+                        Toggle("Notifications", isOn: .constant(true))
+                        Toggle("Dark Mode", isOn: .constant(false))
+                    }
                 }
             }
+            .navigationTitle("Profile")
         }
-        .navigationTitle("Profile")
     }
 }
 

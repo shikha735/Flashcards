@@ -9,7 +9,32 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        HomeView()
+        TabView {
+            HomeView().tabItem {
+                VStack {
+                    Image(systemName: "house")
+                    Text("Home")
+                }
+            }
+            BookListView(viewModel: FlashcardViewModel()).tabItem {
+                VStack {
+                    Image(systemName: "book")
+                    Text("Books")
+                }
+            }
+            NotesView(viewModel: FlashcardViewModel()).tabItem {
+                VStack {
+                    Image(systemName: "note.text")
+                    Text("Notes")
+                }
+            }
+            ProfileView(viewModel: FlashcardViewModel()).tabItem {
+                VStack {
+                    Image(systemName: "person")
+                    Text("Profile")
+                }
+            }
+        }
     }
 }
 

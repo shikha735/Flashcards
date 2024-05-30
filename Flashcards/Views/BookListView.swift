@@ -9,11 +9,9 @@ import SwiftUI
 
 struct BookListView: View {
     @ObservedObject var viewModel: FlashcardViewModel
-//    @Binding var selectedTab: HomeView.Tab // Added binding for selectedTab
     @State private var newBookTitle = ""
     @State private var editingBook: Book?
     @State private var errorMessage = ""
-    @State private var selectedTab: BottomMenuBar.Tab = .books
 
     var body: some View {
         NavigationView {
@@ -82,9 +80,8 @@ struct BookListView: View {
                 .navigationTitle("Books")
             }
         }
-        BottomMenuBar(selectedTab: $selectedTab)
-    }
-}
+    } // body
+} // BookListView
 
 #Preview {
     BookListView(viewModel: FlashcardViewModel())

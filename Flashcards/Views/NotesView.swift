@@ -9,21 +9,20 @@ import SwiftUI
 
 struct NotesView: View {
     @ObservedObject var viewModel: FlashcardViewModel
-    @State private var selectedTab: BottomMenuBar.Tab = .notes
     @State private var newNoteTitle = ""
     @State private var newNoteContent = ""
     @State private var editingNote: Note?
     @State private var errorMessage = ""
 
     var body: some View {
-        NavigationStack {
+        NavigationView{
             VStack {
                 TextField("Note Title", text: $newNoteTitle)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
-
+                
                 EditableTextEditor(text: $newNoteContent, placeholder: "New Note Content")
-
+                
                 Button(action: {
                     if newNoteTitle.trimmingCharacters(in: .whitespaces).isEmpty || newNoteContent.trimmingCharacters(in: .whitespaces).isEmpty {
                         errorMessage = "Note title and content cannot be empty"
@@ -46,13 +45,13 @@ struct NotesView: View {
                         .cornerRadius(8)
                 }
                 .padding()
-
+                
                 if !errorMessage.isEmpty {
                     Text(errorMessage)
                         .foregroundColor(.red)
                         .padding(.bottom)
                 }
-
+                
                 List {
                     ForEach(viewModel.notes) { note in
                         NavigationLink(destination: NoteDetailView(viewModel: viewModel, note: note)) {
@@ -63,10 +62,9 @@ struct NotesView: View {
             }
             .navigationTitle("Notes")
             .padding(.bottom, 60) // Adjust padding to accommodate BottomMenuBar
-            .overlay(BottomMenuBar(selectedTab: $selectedTab), alignment: .bottom)
         }
-    }
-}
+    } // body
+} // NotesView
 
 struct NotesView_Previews: PreviewProvider {
     static var previews: some View {
