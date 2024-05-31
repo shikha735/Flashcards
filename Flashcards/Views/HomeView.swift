@@ -10,22 +10,33 @@ import SwiftUI
 struct HomeView: View {
     @StateObject private var viewModel = FlashcardViewModel()
     @State private var motivationalQuote = "Stay positive, work hard, make it happen."
+    @State private var searchText = ""
+
     var body: some View {
         NavigationView {
             VStack {
                 ScrollView {
                     VStack(alignment: .leading) {
-                        Text("Welcome!")
-                            .font(.largeTitle)
+                        SearchBar(text: $searchText)
                             .padding()
-                        
-                        Text(motivationalQuote)
-                            .font(.headline)
-                            .italic()
-                            .padding([.leading, .trailing])
-                        
-                        RecentlyCreatedView(viewModel: viewModel)
-                            .padding()
+
+                        if !searchText.isEmpty {
+                            SearchResultsView(viewModel: viewModel, searchText: searchText)
+                                .padding()
+                        }
+                        else {
+                            Text("Welcome!")
+                                .font(.largeTitle)
+                                .padding()
+                            
+                            Text(motivationalQuote)
+                                .font(.headline)
+                                .italic()
+                                .padding([.leading, .trailing])
+                            
+                            RecentlyModifiedView(viewModel: viewModel)
+                                .padding()
+                        }
                     }
                 }
             }
@@ -33,14 +44,10 @@ struct HomeView: View {
             .onAppear {
                 loadMotivationalQuote()
             }
-            
-            //        Spacer()
         }
     }
 
     private func loadMotivationalQuote() {
-        // Fetch the motivational quote from an online source.
-        // This is a placeholder implementation.
         let quotes = [
             "Success is not final, failure is not fatal: It is the courage to continue that counts. - Winston Churchill",
             "Don't watch the clock; do what it does. Keep going. - Sam Levenson",
@@ -51,13 +58,42 @@ struct HomeView: View {
     }
 }
 
+struct SearchBar: UIViewRepresentable {
+    @Binding var text: String
 
-struct RecentlyCreatedView: View {
+    class Coordinator: NSObject, UISearchBarDelegate {
+        @Binding var text: String
+
+        init(text: Binding<String>) {
+            _text = text
+        }
+
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            text = searchText
+        }
+    }
+
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(text: $text)
+    }
+
+    func makeUIView(context: Context) -> UISearchBar {
+        let searchBar = UISearchBar(frame: .zero)
+        searchBar.delegate = context.coordinator
+        return searchBar
+    }
+
+    func updateUIView(_ uiView: UISearchBar, context: Context) {
+        uiView.text = text
+    }
+}
+
+struct RecentlyModifiedView: View {
     @ObservedObject var viewModel: FlashcardViewModel
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Recently Modified")
+            Text("Recent Activity")
                 .font(.title2)
                 .padding([.top, .bottom])
             
@@ -73,6 +109,3 @@ struct HomeView_Previews: PreviewProvider {
         HomeView() // Pass a constant binding for selectedTab
     }
 }
-
-
-

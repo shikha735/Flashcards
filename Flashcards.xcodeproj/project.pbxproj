@@ -23,12 +23,13 @@
 		097D4D1B2C06FD43005CD630 /* EditableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D4D1A2C06FD43005CD630 /* EditableTextField.swift */; };
 		097D4D1D2C0701DC005CD630 /* FlashcardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D4D1C2C0701DC005CD630 /* FlashcardView.swift */; };
 		097D4D1F2C079633005CD630 /* EditableTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D4D1E2C079633005CD630 /* EditableTextEditor.swift */; };
-		097D4D212C07A1AA005CD630 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D4D202C07A1AA005CD630 /* AddItemView.swift */; };
 		097D4D232C07A1C4005CD630 /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D4D222C07A1C4005CD630 /* NotesView.swift */; };
 		097D4D252C07A255005CD630 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D4D242C07A255005CD630 /* Note.swift */; };
 		097D4D272C07B208005CD630 /* BookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D4D262C07B208005CD630 /* BookListView.swift */; };
 		097D4D292C07B4AA005CD630 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D4D282C07B4AA005CD630 /* HomeView.swift */; };
 		097D4D2E2C07C926005CD630 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D4D2D2C07C926005CD630 /* DataStore.swift */; };
+		09AECF772C096B3600E6CDCE /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AECF762C096B3600E6CDCE /* SearchResultsView.swift */; };
+		09AECF7C2C0977EF00E6CDCE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AECF7B2C0977EF00E6CDCE /* CoreDataStack.swift */; };
 		09DC91112C07DE30007370D6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DC91102C07DE30007370D6 /* ProfileView.swift */; };
 		09DC91172C080FDC007370D6 /* NoteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DC91162C080FDC007370D6 /* NoteDetailView.swift */; };
 /* End PBXBuildFile section */
@@ -70,12 +71,13 @@
 		097D4D1A2C06FD43005CD630 /* EditableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextField.swift; sourceTree = "<group>"; };
 		097D4D1C2C0701DC005CD630 /* FlashcardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardView.swift; sourceTree = "<group>"; };
 		097D4D1E2C079633005CD630 /* EditableTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextEditor.swift; sourceTree = "<group>"; };
-		097D4D202C07A1AA005CD630 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
 		097D4D222C07A1C4005CD630 /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
 		097D4D242C07A255005CD630 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		097D4D262C07B208005CD630 /* BookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListView.swift; sourceTree = "<group>"; };
 		097D4D282C07B4AA005CD630 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		097D4D2D2C07C926005CD630 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		09AECF762C096B3600E6CDCE /* SearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = "<group>"; };
+		09AECF7B2C0977EF00E6CDCE /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		09DC91102C07DE30007370D6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		09DC91162C080FDC007370D6 /* NoteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,6 +136,7 @@
 				097D4CDC2C06EF6A005CD630 /* FlashcardsApp.swift */,
 				097D4CDE2C06EF6A005CD630 /* ContentView.swift */,
 				097D4CE02C06EF6C005CD630 /* Assets.xcassets */,
+				09AECF7B2C0977EF00E6CDCE /* CoreDataStack.swift */,
 				097D4CE22C06EF6C005CD630 /* Preview Content */,
 			);
 			path = Flashcards;
@@ -192,11 +195,11 @@
 				097D4D1A2C06FD43005CD630 /* EditableTextField.swift */,
 				097D4D1C2C0701DC005CD630 /* FlashcardView.swift */,
 				097D4D1E2C079633005CD630 /* EditableTextEditor.swift */,
-				097D4D202C07A1AA005CD630 /* AddItemView.swift */,
 				097D4D222C07A1C4005CD630 /* NotesView.swift */,
 				097D4D262C07B208005CD630 /* BookListView.swift */,
 				09DC91102C07DE30007370D6 /* ProfileView.swift */,
 				09DC91162C080FDC007370D6 /* NoteDetailView.swift */,
+				09AECF762C096B3600E6CDCE /* SearchResultsView.swift */,
 				097D4D282C07B4AA005CD630 /* HomeView.swift */,
 			);
 			path = Views;
@@ -332,8 +335,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09AECF7C2C0977EF00E6CDCE /* CoreDataStack.swift in Sources */,
 				097D4CDF2C06EF6A005CD630 /* ContentView.swift in Sources */,
 				097D4D1D2C0701DC005CD630 /* FlashcardView.swift in Sources */,
+				09AECF772C096B3600E6CDCE /* SearchResultsView.swift in Sources */,
 				097D4D2E2C07C926005CD630 /* DataStore.swift in Sources */,
 				097D4D1F2C079633005CD630 /* EditableTextEditor.swift in Sources */,
 				097D4D272C07B208005CD630 /* BookListView.swift in Sources */,
@@ -341,7 +346,6 @@
 				097D4D1B2C06FD43005CD630 /* EditableTextField.swift in Sources */,
 				097D4CDD2C06EF6A005CD630 /* FlashcardsApp.swift in Sources */,
 				097D4D112C06F9B1005CD630 /* FlashcardViewModel.swift in Sources */,
-				097D4D212C07A1AA005CD630 /* AddItemView.swift in Sources */,
 				09DC91172C080FDC007370D6 /* NoteDetailView.swift in Sources */,
 				09DC91112C07DE30007370D6 /* ProfileView.swift in Sources */,
 				097D4D0A2C06F8BE005CD630 /* Book.swift in Sources */,

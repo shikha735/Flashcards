@@ -25,6 +25,9 @@ struct ProfileView: View {
                         Toggle("Notifications", isOn: .constant(true))
                         Toggle("Dark Mode", isOn: .constant(false))
                     }
+                    Section(header: Text("")) {
+                        Text("Logout")
+                    }
                 }
             }
             .navigationTitle("Profile")
